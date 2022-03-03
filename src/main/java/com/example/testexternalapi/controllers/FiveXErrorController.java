@@ -3,8 +3,6 @@ package com.example.testexternalapi.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.ServiceUnavailableException;
-
 @RestController
 @RequestMapping("test")
 public class FiveXErrorController {
