@@ -2,6 +2,8 @@ package com.example.testexternalapi.controllers;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.ServiceUnavailableException;
+
 @RestController
 @RequestMapping("test")
 public class FiveXErrorController {
@@ -33,5 +35,11 @@ public class FiveXErrorController {
 
         return "Thanks for waiting!";
     }
+
+    @PostMapping("service-unavailable")
+    public String testServiceUnavailableException() throws Exception {
+        throw new ServiceUnavailableException();
+    }
+
 
 }
