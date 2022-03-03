@@ -25,7 +25,7 @@ public class FiveXErrorController {
     }
 
     @PostMapping("time-out/{time}")
-    public String testTimeOut(@PathVariable("time") Integer time) throws Exception {
+    public String testTimeOut(@PathVariable("time") Integer time)  {
 
         try {
             Thread.sleep(time);
@@ -37,7 +37,7 @@ public class FiveXErrorController {
     }
 
     @PostMapping("service-unavailable")
-    public String testServiceUnavailableException() throws Exception {
+    public String testServiceUnavailableException() throws ServiceUnavailableException {
         throw new ServiceUnavailableException();
     }
 
