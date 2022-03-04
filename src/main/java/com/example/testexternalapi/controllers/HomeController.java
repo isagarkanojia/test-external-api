@@ -8,7 +8,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        return "I'm Up!";
+        return "I'm Up! Deployed Auto";
     }
 
 
