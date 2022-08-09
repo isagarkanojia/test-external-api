@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class DelayController {
 
 
-    @PostMapping("/{time}")
+    @PostMapping("test/{time}")
     public CDto delayTest(@RequestBody Request request, @PathVariable("time") Integer time) {
 
         CDto dto = getResponse(request);
