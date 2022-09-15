@@ -74,6 +74,56 @@ public class DelayController {
     private final String LOCALHOST_IPV4 = "127.0.0.1";
     private final String LOCALHOST_IPV6 = "0:0:0:0:0:0:0:1";
 
+
+    class IpDto{
+       String xforwardFor;
+       String proxyClientIp;
+       String wlproxyClientIp;
+       String remoteAddr;
+       String hostAddress;
+
+        public String getHostAddress() {
+            return hostAddress;
+        }
+
+        public void setHostAddress(String hostAddress) {
+            this.hostAddress = hostAddress;
+        }
+
+        public String getXforwardFor() {
+            return xforwardFor;
+        }
+
+        public void setXforwardFor(String xforwardFor) {
+            this.xforwardFor = xforwardFor;
+        }
+
+        public String getProxyClientIp() {
+            return proxyClientIp;
+        }
+
+        public void setProxyClientIp(String proxyClientIp) {
+            this.proxyClientIp = proxyClientIp;
+        }
+
+        public String getWlproxyClientIp() {
+            return wlproxyClientIp;
+        }
+
+        public void setWlproxyClientIp(String wlproxyClientIp) {
+            this.wlproxyClientIp = wlproxyClientIp;
+        }
+
+        public String getRemoteAddr() {
+            return remoteAddr;
+        }
+
+        public void setRemoteAddr(String remoteAddr) {
+            this.remoteAddr = remoteAddr;
+        }
+    }
+
+
     @GetMapping("client-ip")
     public String clientIP(HttpServletRequest request) {
         String ipAddress = request.getHeader("X-Forwarded-For");
@@ -107,4 +157,27 @@ public class DelayController {
 
     }
 
+
+    @GetMapping("v2/client-ip")
+    public IpDto clientIPV2(HttpServletRequest request) {
+        IpDto dto = new IpDto();
+
+        dto.setXforwardFor(request.getHeader("X-Forwarded-For"));
+        dto.setProxyClientIp(request.getHeader("Proxy-Client-IP"));
+        dto.setWlproxyClientIp(request.getHeader("WL-Proxy-Client-IP"));
+        dto.setRemoteAddr(request.getRemoteAddr());
+
+
+        if (LOCALHOST_IPV4.equals(dto.getRemoteAddr()) || LOCALHOST_IPV6.equals(dto.getRemoteAddr())) {
+            try {
+                InetAddress inetAddress = InetAddress.getLocalHost();
+                dto.setHostAddress(inetAddress.getHostAddress());
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return dto;
+
+    }
 }
