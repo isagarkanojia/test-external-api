@@ -58,9 +58,8 @@ public class ClientDetailController {
 
         dto.setXforwardFor(request.getHeader("X-Forwarded-For"));
         dto.setProxyClientIp(request.getHeader("Proxy-Client-IP"));
-        dto.setWlproxyClientIp(request.getHeader("WL-Proxy-Client-IP"));
+        dto.setWlProxyClientIp(request.getHeader("WL-Proxy-Client-IP"));
         dto.setRemoteAddr(request.getRemoteAddr());
-
 
         if (LOCALHOST_IPV4.equals(dto.getRemoteAddr()) || LOCALHOST_IPV6.equals(dto.getRemoteAddr())) {
             try {
